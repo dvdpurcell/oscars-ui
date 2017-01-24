@@ -23,12 +23,12 @@ public class OscarsUiApplication {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
+                    .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                     .httpBasic().and()
                         .authorizeRequests()
                         .antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll().anyRequest()
-                    .authenticated().and()
-                    .csrf()
-                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                    .authenticated();
+
         }
     }
 }
